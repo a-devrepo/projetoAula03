@@ -10,56 +10,64 @@ import entities.Funcionario;
 
 public class FuncionarioController {
 
+	private final Scanner scanner = new Scanner(System.in);
+	
 	public void cadastrarFuncionario() {
-		
-		var scanner = new Scanner(System.in);
 		
 		System.out.println("\nCADASTRO DE FUNCIONÁRIO:\n");
 		
-		var funcionario = new Funcionario();
+		var funcionario = preencherDadosFuncionario();
+		funcionario.setEndereco(preencherDadosEndereco());
+		
+		System.out.println("\nCADASTRO REALIZADO COM SUCESSO!\n");
+	}
+	
+	private Funcionario preencherDadosFuncionario() {
+		
+        var funcionario = new Funcionario();
 		
 		funcionario.setId(UUID.randomUUID());
 		
-		System.out.print("INFORME O NOME.............................: ");
-		funcionario.setNome(scanner.nextLine());
+		funcionario.setNome(lerLinha("INFORME O NOME.............................: "));
 		
-		System.out.print("INFORME O CPF:.............................: ");
-		funcionario.setCpf(scanner.nextLine());
+		funcionario.setCpf(lerLinha("INFORME O CPF:.............................: "));
 		
-		System.out.print("DATA DE ADMISSÃO (dd/MM/yyyy)..............: ");
-		var dataAdmissaoInput = scanner.nextLine();
+		var dataAdmissaoInput = lerLinha("DATA DE ADMISSÃO (dd/MM/yyyy)..............:");
 		var dataAdmissao = LocalDate.parse(dataAdmissaoInput,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		funcionario.setDataAdmissao(dataAdmissao);
 		
+		return funcionario;
+	}
+	
+	private Endereco preencherDadosEndereco() {
+		
 		var endereco = new Endereco();
-		
+
 		endereco.setId(UUID.randomUUID());
-		
-		System.out.print("INFORME O LOGRADOURO.......................: ");
-		endereco.setLogradouro(scanner.nextLine());
-		
-		System.out.print("INFORME O NÚMERO...........................: ");
-		endereco.setNumero(scanner.nextLine());
-		
-		System.out.print("INFORME O COMPLEMENTO......................: ");
-		endereco.setComplemento(scanner.nextLine());
-		
-		System.out.print("INFORME O BAIRRO............................: ");
-		endereco.setBairro(scanner.nextLine());
-		
-		System.out.print("INFORME A CIDADE............................: ");
-		endereco.setCidade(scanner.nextLine());
-		
-		System.out.print("INFORME O ESTADO............................: ");
-		endereco.setEstado(scanner.nextLine());
-		
-		System.out.print("INFORME O CEP...............................: ");
-		endereco.setCep(scanner.nextLine());
-		
-		
-		
+
+		endereco.setLogradouro(lerLinha("INFORME O LOGRADOURO.......................: "));
+
+		endereco.setNumero(lerLinha("INFORME O NÚMERO...........................: "));
+
+		endereco.setComplemento(lerLinha("INFORME O COMPLEMENTO......................: "));
+
+		endereco.setBairro(lerLinha("INFORME O BAIRRO............................: "));
+
+		endereco.setCidade(lerLinha("INFORME A CIDADE............................: "));
+
+		endereco.setEstado(lerLinha("INFORME O ESTADO............................: "));
+
+		endereco.setCep(lerLinha("INFORME O CEP...............................: "));
+
+		return endereco;
+	}
+	
+	private String lerLinha(String mensagem) {
+		System.out.print(mensagem);
+		return scanner.nextLine();
+	}
+	
+	public void fecharScanner() {
 		scanner.close();
-		
-		System.out.println("\nCADASTRO REALIZADO COM SUCESSO!\n");
 	}
 }
