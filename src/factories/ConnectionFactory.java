@@ -9,7 +9,7 @@ public class ConnectionFactory {
 	private static final String USER = "appuser";
 	private static final String PASSWORD = "apppassword";
 
-	private ConnectionFactory() {
+	public ConnectionFactory() {
 	}
 
 	public Connection getConnection() throws Exception {
