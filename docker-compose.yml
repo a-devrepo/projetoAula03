@@ -1,0 +1,23 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-cadastro-funcionarios
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: funcionarios-db
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppassword
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - cadastro-funcionarios-network
+
+volumes:
+  mysql-data:
+
+networks:
+  cadastro-funcionarios-network:
+    driver: bridge
