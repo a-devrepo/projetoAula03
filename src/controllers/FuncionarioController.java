@@ -7,10 +7,17 @@ import java.util.UUID;
 
 import entities.Endereco;
 import entities.Funcionario;
+import services.FuncionarioService;
 
 public class FuncionarioController {
 
 	private final Scanner scanner = new Scanner(System.in);
+	
+	private final FuncionarioService service;
+	
+	public FuncionarioController(FuncionarioService service) {
+		this.service = service;
+	}
 	
 	public void cadastrarFuncionario() {
 		
@@ -18,6 +25,8 @@ public class FuncionarioController {
 		
 		var funcionario = preencherDadosFuncionario();
 		funcionario.setEndereco(preencherDadosEndereco());
+		
+		service.cadastrarFuncionario(funcionario);
 		
 		System.out.println("\nCADASTRO REALIZADO COM SUCESSO!\n");
 	}
