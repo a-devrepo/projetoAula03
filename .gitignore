@@ -1,0 +1,43 @@
+# Eclipse settings
+/.classpath
+/.project
+/.settings/
+
+# Compiled class files
+/bin/
+/target/
+/out/
+
+# Maven local repo (if applicable)
+.mvn/
+log/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Eclipse launch configs
+*.launch
+
+# Backup files
+*.bak
+*.swp
+*~
+
+# Java-specific
+*.class
+*.jar
+*.war
+*.ear
+
+# User-specific files
+*.iml
+*.iws
+*.ipr
+
+# IntelliJ IDEA (if opened later with IDEA)
+.idea/
+*.iws
+*.iml
+*.ipr
