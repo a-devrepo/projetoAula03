@@ -2,6 +2,9 @@ package factories;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import exceptions.RepositoryException;
 
 public class ConnectionFactory {
 
@@ -12,12 +15,12 @@ public class ConnectionFactory {
 	public ConnectionFactory() {
 	}
 
-	public Connection getConnection() throws Exception {
-		var host = "jdbc:mysql://localhost:3306/funcionarios_db";
-		var user = "appuser";
-		var password = "apppassword";
-
-		DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-		return DriverManager.getConnection(host, user, password);
+	public Connection getConnection() {
+		try {
+			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+			return DriverManager.getConnection(URL, USER, PASSWORD);
+		} catch (SQLException sqlException) {
+			throw new RepositoryException("Erro ao estabelecer conexão com o banco de dados: ", sqlException);
+		}
 	}
 }

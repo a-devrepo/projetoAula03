@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import entities.Endereco;
 import entities.Funcionario;
+import exceptions.RepositoryException;
 import services.FuncionarioService;
 
 public class FuncionarioController {
@@ -21,14 +22,20 @@ public class FuncionarioController {
 	
 	public void cadastrarFuncionario() {
 		
-		System.out.println("\nCADASTRO DE FUNCIONÁRIO:\n");
-		
-		var funcionario = preencherDadosFuncionario();
-		funcionario.setEndereco(preencherDadosEndereco());
-		
-		service.cadastrarFuncionario(funcionario);
-		
-		System.out.println("\nCADASTRO REALIZADO COM SUCESSO!\n");
+		try {
+			System.out.println("\nCADASTRO DE FUNCIONÁRIO:\n");
+			
+			var funcionario = preencherDadosFuncionario();
+			funcionario.setEndereco(preencherDadosEndereco());
+			
+			service.cadastrarFuncionario(funcionario);
+			System.out.println("\nCADASTRO REALIZADO COM SUCESSO!\n");
+			
+		} catch (RepositoryException repositoryException) {
+			System.err.println("Erro de repositório: "+repositoryException.getMessage());
+		} catch (Exception exception) {
+			System.err.println("Erro inesperado: "+ exception.getMessage());
+		}
 	}
 	
 	private Funcionario preencherDadosFuncionario() {
