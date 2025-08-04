@@ -67,7 +67,7 @@ Isso criará um container MySQL com as seguintes credenciais:
 
 O **MySQL Connector/J** é o driver JDBC necessário para a aplicação se conectar ao MySQL.
 
-Para que a aplicação funcione corretamente, precisamos ter o arquivo do driver dentro da pasta chamada `libs`, que deve estar localizada **na raiz do projeto** (ou seja, na mesma pasta onde você clonou o repositório).
+Para que a aplicação funcione corretamente, precisamos ter o arquivo do driver dentro da pasta chamada `libs`, que deve estar localizada **na raiz do projeto**.
 
 #### Como criar a pasta `libs` na raiz do projeto
 
@@ -138,7 +138,7 @@ Após colocar o arquivo `.jar` na pasta `libs`, configure sua IDE para reconhece
 O script `script.sql` está na pasta `sql`.  
 Você pode executá-lo de duas formas:
 
-**Via terminal (dentro do container):**
+**Via terminal (ainda na raiz do projeto):**
 ```bash
 docker exec -i mysql-cadastro-funcionarios mysql -uappuser -papppassword funcionarios_db < sql/script.sql
 ```
