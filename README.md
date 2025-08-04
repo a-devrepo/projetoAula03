@@ -29,6 +29,7 @@ O projeto está organizado para manter a **separação de responsabilidades**:
 - **`entities`**: Representa as entidades do domínio (ex.: `Funcionario`).  
 - **`exceptions`**: Exceções customizadas para erros de persistência ou de negócio.  
 - **`sql`**: Scripts SQL para criação das tabelas e carga inicial de dados.  
+- **`utils`**: Handler que centraliza tratamento e exibição de erros.
 
 ---
 
