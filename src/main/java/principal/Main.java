@@ -19,10 +19,11 @@ public class Main {
 		var connectionFactory = new ConnectionFactory(dataBaseConfig);
 		var funcionarioRepository = new FuncionarioRepository(connectionFactory);
 		var funcionarioService = new FuncionarioService(funcionarioRepository);
-		var errorHandler = new ErrorHandler();
 		var consoleReaderWriter = new ConsoleReaderWriter(new Scanner(System.in));
+		var errorHandler = new ErrorHandler(consoleReaderWriter);
 		var funcionarioFormReader = new FuncionarioFormReader(consoleReaderWriter);
-		var funcionarioController = new FuncionarioController(funcionarioService, errorHandler,consoleReaderWriter, funcionarioFormReader);
+		var funcionarioController = new FuncionarioController(funcionarioService, errorHandler, consoleReaderWriter,
+				funcionarioFormReader);
 
 		funcionarioController.cadastrarFuncionario();
 		consoleReaderWriter.fecharScanner();
