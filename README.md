@@ -28,7 +28,7 @@ O projeto está organizado para manter a **separação de responsabilidades**:
 - **`factories`**: Fornece conexões com o banco MySQL (`ConnectionFactory`).  
 - **`entities`**: Representa as entidades do domínio (ex.: `Funcionario`).  
 - **`exceptions`**: Exceções customizadas para erros de persistência ou de negócio.  
-- **`utils`**: Handler que centraliza tratamento e exibição de erros.
+- **`handlers`**: Handler que centraliza tratamento e exibição de erros.
 
 ---
 
