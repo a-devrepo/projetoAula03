@@ -1,13 +1,13 @@
 package services;
 
 import entities.Funcionario;
-import repositories.FuncionarioRepository;
+import repositories.IFuncionarioRepository;
 
 public class FuncionarioServiceImpl implements IFuncionarioService {
 
-	private final FuncionarioRepository repository;
+	private final IFuncionarioRepository repository;
 	
-	public FuncionarioServiceImpl(FuncionarioRepository repository) {
+	public FuncionarioServiceImpl(IFuncionarioRepository repository) {
 		this.repository = repository;
 	}
 	

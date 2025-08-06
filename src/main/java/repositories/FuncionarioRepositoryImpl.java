@@ -6,14 +6,15 @@ import entities.Funcionario;
 import exceptions.RepositoryException;
 import factories.ConnectionFactory;
 
-public class FuncionarioRepository {
+public class FuncionarioRepositoryImpl implements IFuncionarioRepository {
 
 	private ConnectionFactory connectionFactory;
 
-	public FuncionarioRepository(ConnectionFactory connectionFactory) {
+	public FuncionarioRepositoryImpl(ConnectionFactory connectionFactory) {
 		this.connectionFactory = connectionFactory;
 	}
 
+	@Override
 	public void inserir(Funcionario funcionario) {
 		
 		var sqlFuncionario = "INSERT INTO funcionario (id_funcionario, nome, cpf, data_admissao) values (?,?,?,?)";
