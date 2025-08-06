@@ -3,7 +3,7 @@
 ## Descrição
 
 Este é um projeto simples de cadastro de funcionários implementado com **Java 17**, utilizando **JDBC** para acesso ao banco de dados **MySQL**.  
-O banco de dados é executado dentro de um container **Docker**, e a aplicação segue uma arquitetura em camadas para garantir organização, coesão e separação de responsabilidades.
+O banco de dados é executado dentro de um container **Docker**, e a aplicação segue uma arquitetura em camadas para garantir organização, coesão e separação de responsabilidades. As configurações de banco são carregadas a partir de um arquivo de propriedades externo.
 
 ---
 
@@ -28,7 +28,6 @@ O projeto está organizado para manter a **separação de responsabilidades**:
 - **`factories`**: Fornece conexões com o banco MySQL (`ConnectionFactory`).  
 - **`entities`**: Representa as entidades do domínio (ex.: `Funcionario`).  
 - **`exceptions`**: Exceções customizadas para erros de persistência ou de negócio.  
-- **`sql`**: Scripts SQL para criação das tabelas e carga inicial de dados.  
 - **`utils`**: Handler que centraliza tratamento e exibição de erros.
 
 ---
@@ -136,12 +135,12 @@ Após colocar o arquivo `.jar` na pasta `libs`, configure sua IDE para reconhece
 
 ### 4. Executar o script SQL
 
-O script `script.sql` está na pasta `sql`.  
+O script `script.sql` está na raiz do projeto.  
 Você pode executá-lo de duas formas:
 
 **Via terminal (ainda na raiz do projeto):**
 ```bash
-docker exec -i mysql-cadastro-funcionarios mysql -uappuser -papppassword funcionarios_db < sql/script.sql
+docker exec -i mysql-cadastro-funcionarios mysql -uappuser -papppassword funcionarios_db < script.sql
 ```
 
 **Ou via cliente SQL** (MySQL Workbench, DBeaver, etc.):  
@@ -153,7 +152,18 @@ docker exec -i mysql-cadastro-funcionarios mysql -uappuser -papppassword funcion
 
 ---
 
-### 5. Executar a aplicação na IDE
+### 5. Configurar o arquivo de propriedaes
+
+- Caminho: src/main/resources/database.properties  
+
+- Conteúdo:
+   - db.url=jdbc:mysql://localhost:3306/funcionarios_db
+   - db.username=appuser
+   - db.password=apppassword
+
+---
+
+### 6. Executar a aplicação na IDE
 
 1. Abra o projeto na sua IDE (IntelliJ, Eclipse ou outra de sua preferência).  
 2. Verifique se o **MySQL Connector/J** está adicionado ao classpath.  
@@ -163,6 +173,6 @@ docker exec -i mysql-cadastro-funcionarios mysql -uappuser -papppassword funcion
 ---
 
 ## Observações
-- As credenciais do banco estão no `docker-compose.yml` e devem corresponder às configuradas na `ConnectionFactory`.  
-- Caso altere qualquer dado no `docker-compose.yml` (usuário, senha, banco), atualize também no código.  
+- As credenciais do banco estão no `docker-compose.yml` devem corresponder às configuradas no arquivo `database.properties`.  
+- Caso altere qualquer dado no `docker-compose.yml` (usuário, senha, banco), atualize também no arquivo.  
 - O projeto segue boas práticas de **arquitetura em camadas** para facilitar manutenção e evolução.
