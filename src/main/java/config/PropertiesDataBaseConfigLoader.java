@@ -13,7 +13,7 @@ public class PropertiesDataBaseConfigLoader implements DatabaseConfigLoader {
 
 	private static final String PROPERTIES_FILE = "database.properties";
 	private static final String DB_URL_KEY = "db.url";
-	private static final String DB_USERNAME_KEY = "d.username";
+	private static final String DB_USERNAME_KEY = "db.username";
 	private static final String DB_PASSWORD_KEY = "db.password";
 	
 	public DatabaseConfig loadDatabaseConfig() {
