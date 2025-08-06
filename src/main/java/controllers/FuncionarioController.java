@@ -1,15 +1,9 @@
 package controllers;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
-import java.util.UUID;
-
-import entities.Endereco;
-import entities.Funcionario;
 import exceptions.RepositoryException;
 import handlers.ErrorHandler;
 import io.ConsoleReaderWriter;
+import io.FuncionarioFormReader;
 import services.FuncionarioService;
 
 public class FuncionarioController {
@@ -19,11 +13,18 @@ public class FuncionarioController {
 	private final FuncionarioService service;
 
 	private final ErrorHandler errorHandler;
+	
+	private final FuncionarioFormReader funcionarioFormReader;
 
-	public FuncionarioController(FuncionarioService service, ErrorHandler errorHandler, ConsoleReaderWriter consoleReaderWriter) {
+	public FuncionarioController(
+			FuncionarioService service, 
+			ErrorHandler errorHandler, 
+			ConsoleReaderWriter consoleReaderWriter,
+			FuncionarioFormReader funcionarioFormReader) {
 		this.service = service;
 		this.errorHandler = errorHandler;
 		this.consoleReaderWriter = consoleReaderWriter;
+		this.funcionarioFormReader = funcionarioFormReader;
 	}
 
 	public void cadastrarFuncionario() {
@@ -31,8 +32,7 @@ public class FuncionarioController {
 		try {
 			consoleReaderWriter.exibirMensagem("\nCADASTRO DE FUNCIONÁRIO:\n");
 
-			var funcionario = preencherDadosFuncionario();
-			funcionario.setEndereco(preencherDadosEndereco());
+			var funcionario = funcionarioFormReader.preencherDadosFuncionario();
 
 			service.cadastrarFuncionario(funcionario);
 			consoleReaderWriter.exibirMensagem("\nCADASTRO REALIZADO COM SUCESSO!\n");
@@ -45,45 +45,5 @@ public class FuncionarioController {
 			
 			errorHandler.logError("Erro inesperado: ", exception);
 		}
-	}
-
-	private Funcionario preencherDadosFuncionario() {
-
-		var funcionario = new Funcionario();
-
-		funcionario.setId(UUID.randomUUID());
-
-		funcionario.setNome(consoleReaderWriter.lerLinha("INFORME O NOME.............................: "));
-
-		funcionario.setCpf(consoleReaderWriter.lerLinha("INFORME O CPF:.............................: "));
-
-		var dataAdmissaoInput = consoleReaderWriter.lerLinha("DATA DE ADMISSÃO (dd/MM/yyyy)..............:");
-		var dataAdmissao = LocalDate.parse(dataAdmissaoInput, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-		funcionario.setDataAdmissao(dataAdmissao);
-
-		return funcionario;
-	}
-
-	private Endereco preencherDadosEndereco() {
-
-		var endereco = new Endereco();
-
-		endereco.setId(UUID.randomUUID());
-
-		endereco.setLogradouro(consoleReaderWriter.lerLinha("INFORME O LOGRADOURO.......................: "));
-
-		endereco.setNumero(consoleReaderWriter.lerLinha("INFORME O NÚMERO...........................: "));
-
-		endereco.setComplemento(consoleReaderWriter.lerLinha("INFORME O COMPLEMENTO......................: "));
-
-		endereco.setBairro(consoleReaderWriter.lerLinha("INFORME O BAIRRO............................: "));
-
-		endereco.setCidade(consoleReaderWriter.lerLinha("INFORME A CIDADE............................: "));
-
-		endereco.setEstado(consoleReaderWriter.lerLinha("INFORME O ESTADO............................: "));
-
-		endereco.setCep(consoleReaderWriter.lerLinha("INFORME O CEP...............................: "));
-
-		return endereco;
 	}
 }
