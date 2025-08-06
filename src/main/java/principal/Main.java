@@ -2,6 +2,7 @@ package principal;
 
 import java.util.Scanner;
 
+import config.PropertiesDataBaseConfigLoader;
 import controllers.FuncionarioController;
 import factories.ConnectionFactory;
 import handlers.ErrorHandler;
@@ -14,7 +15,8 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		var connectionFactory = new ConnectionFactory();
+		var dataBaseConfig = new PropertiesDataBaseConfigLoader().loadDatabaseConfig();
+		var connectionFactory = new ConnectionFactory(dataBaseConfig);
 		var funcionarioRepository = new FuncionarioRepository(connectionFactory);
 		var funcionarioService = new FuncionarioService(funcionarioRepository);
 		var errorHandler = new ErrorHandler();
