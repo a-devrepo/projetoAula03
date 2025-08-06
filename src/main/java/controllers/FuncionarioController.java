@@ -9,31 +9,33 @@ import entities.Endereco;
 import entities.Funcionario;
 import exceptions.RepositoryException;
 import handlers.ErrorHandler;
+import io.ConsoleReaderWriter;
 import services.FuncionarioService;
 
 public class FuncionarioController {
-
-	private final Scanner scanner = new Scanner(System.in);
+	
+	private final ConsoleReaderWriter consoleReaderWriter;
 
 	private final FuncionarioService service;
 
 	private final ErrorHandler errorHandler;
 
-	public FuncionarioController(FuncionarioService service, ErrorHandler errorHandler) {
+	public FuncionarioController(FuncionarioService service, ErrorHandler errorHandler, ConsoleReaderWriter consoleReaderWriter) {
 		this.service = service;
 		this.errorHandler = errorHandler;
+		this.consoleReaderWriter = consoleReaderWriter;
 	}
 
 	public void cadastrarFuncionario() {
 
 		try {
-			System.out.println("\nCADASTRO DE FUNCIONÁRIO:\n");
+			consoleReaderWriter.exibirMensagem("\nCADASTRO DE FUNCIONÁRIO:\n");
 
 			var funcionario = preencherDadosFuncionario();
 			funcionario.setEndereco(preencherDadosEndereco());
 
 			service.cadastrarFuncionario(funcionario);
-			System.out.println("\nCADASTRO REALIZADO COM SUCESSO!\n");
+			consoleReaderWriter.exibirMensagem("\nCADASTRO REALIZADO COM SUCESSO!\n");
 
 		} catch (RepositoryException repositoryException) {
 
@@ -51,11 +53,11 @@ public class FuncionarioController {
 
 		funcionario.setId(UUID.randomUUID());
 
-		funcionario.setNome(lerLinha("INFORME O NOME.............................: "));
+		funcionario.setNome(consoleReaderWriter.lerLinha("INFORME O NOME.............................: "));
 
-		funcionario.setCpf(lerLinha("INFORME O CPF:.............................: "));
+		funcionario.setCpf(consoleReaderWriter.lerLinha("INFORME O CPF:.............................: "));
 
-		var dataAdmissaoInput = lerLinha("DATA DE ADMISSÃO (dd/MM/yyyy)..............:");
+		var dataAdmissaoInput = consoleReaderWriter.lerLinha("DATA DE ADMISSÃO (dd/MM/yyyy)..............:");
 		var dataAdmissao = LocalDate.parse(dataAdmissaoInput, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		funcionario.setDataAdmissao(dataAdmissao);
 
@@ -68,29 +70,20 @@ public class FuncionarioController {
 
 		endereco.setId(UUID.randomUUID());
 
-		endereco.setLogradouro(lerLinha("INFORME O LOGRADOURO.......................: "));
+		endereco.setLogradouro(consoleReaderWriter.lerLinha("INFORME O LOGRADOURO.......................: "));
 
-		endereco.setNumero(lerLinha("INFORME O NÚMERO...........................: "));
+		endereco.setNumero(consoleReaderWriter.lerLinha("INFORME O NÚMERO...........................: "));
 
-		endereco.setComplemento(lerLinha("INFORME O COMPLEMENTO......................: "));
+		endereco.setComplemento(consoleReaderWriter.lerLinha("INFORME O COMPLEMENTO......................: "));
 
-		endereco.setBairro(lerLinha("INFORME O BAIRRO............................: "));
+		endereco.setBairro(consoleReaderWriter.lerLinha("INFORME O BAIRRO............................: "));
 
-		endereco.setCidade(lerLinha("INFORME A CIDADE............................: "));
+		endereco.setCidade(consoleReaderWriter.lerLinha("INFORME A CIDADE............................: "));
 
-		endereco.setEstado(lerLinha("INFORME O ESTADO............................: "));
+		endereco.setEstado(consoleReaderWriter.lerLinha("INFORME O ESTADO............................: "));
 
-		endereco.setCep(lerLinha("INFORME O CEP...............................: "));
+		endereco.setCep(consoleReaderWriter.lerLinha("INFORME O CEP...............................: "));
 
 		return endereco;
-	}
-
-	private String lerLinha(String mensagem) {
-		System.out.print(mensagem);
-		return scanner.nextLine();
-	}
-
-	public void fecharScanner() {
-		scanner.close();
 	}
 }
