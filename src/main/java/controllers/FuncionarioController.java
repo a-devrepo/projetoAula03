@@ -1,6 +1,6 @@
 package controllers;
 
-import exceptions.RepositoryException;
+import exceptions.PersistenceException;
 import handlers.ErrorHandler;
 import io.ConsoleReaderWriter;
 import io.FuncionarioFormReader;
@@ -37,9 +37,9 @@ public class FuncionarioController {
 			service.cadastrarFuncionario(funcionario);
 			consoleReaderWriter.exibirMensagem("\nCADASTRO REALIZADO COM SUCESSO!\n");
 
-		} catch (RepositoryException repositoryException) {
+		} catch (PersistenceException persistenceException) {
 
-			errorHandler.logError("Erro de repositório: ", repositoryException);
+			errorHandler.logError("Erro de persistência: ", persistenceException);
 		
 		} catch (Exception exception) {
 			

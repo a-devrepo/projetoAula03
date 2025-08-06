@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import config.DatabaseConfig;
-import exceptions.RepositoryException;
+import exceptions.ConnectionException;
 
 public class ConnectionFactory {
 
@@ -23,7 +23,7 @@ public class ConnectionFactory {
 					databaseConfig.getPassword());
 			
 		} catch (SQLException sqlException) {
-			throw new RepositoryException("Erro ao estabelecer conexão com o banco de dados: ", sqlException);
+			throw new ConnectionException("Erro ao estabelecer conexão com o banco de dados: ", sqlException);
 		}
 	}
 }
