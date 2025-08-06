@@ -9,7 +9,7 @@ import handlers.ErrorHandler;
 import io.ConsoleReaderWriter;
 import io.FuncionarioFormReader;
 import repositories.FuncionarioRepository;
-import services.FuncionarioService;
+import services.FuncionarioServiceImpl;
 
 public class Main {
 
@@ -18,7 +18,7 @@ public class Main {
 		var dataBaseConfig = new PropertiesDataBaseConfigLoader().loadDatabaseConfig();
 		var connectionFactory = new ConnectionFactory(dataBaseConfig);
 		var funcionarioRepository = new FuncionarioRepository(connectionFactory);
-		var funcionarioService = new FuncionarioService(funcionarioRepository);
+		var funcionarioService = new FuncionarioServiceImpl(funcionarioRepository);
 		var consoleReaderWriter = new ConsoleReaderWriter(new Scanner(System.in));
 		var errorHandler = new ErrorHandler(consoleReaderWriter);
 		var funcionarioFormReader = new FuncionarioFormReader(consoleReaderWriter);

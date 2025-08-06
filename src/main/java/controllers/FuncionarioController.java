@@ -4,20 +4,20 @@ import exceptions.PersistenceException;
 import handlers.ErrorHandler;
 import io.ConsoleReaderWriter;
 import io.FuncionarioFormReader;
-import services.FuncionarioService;
+import services.IFuncionarioService;
 
 public class FuncionarioController {
 	
 	private final ConsoleReaderWriter consoleReaderWriter;
 
-	private final FuncionarioService service;
+	private final IFuncionarioService service;
 
 	private final ErrorHandler errorHandler;
 	
 	private final FuncionarioFormReader funcionarioFormReader;
 
 	public FuncionarioController(
-			FuncionarioService service, 
+			IFuncionarioService service, 
 			ErrorHandler errorHandler, 
 			ConsoleReaderWriter consoleReaderWriter,
 			FuncionarioFormReader funcionarioFormReader) {
