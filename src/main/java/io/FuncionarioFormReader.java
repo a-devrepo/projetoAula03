@@ -21,11 +21,11 @@ public class FuncionarioFormReader {
 
 		funcionario.setId(UUID.randomUUID());
 
-		funcionario.setNome(consoleReaderWriter.lerLinha("INFORME O NOME.............................: "));
+		funcionario.setNome(consoleReaderWriter.lerLinha("INFORME O NOME..............................: "));
 
-		funcionario.setCpf(consoleReaderWriter.lerLinha("INFORME O CPF:.............................: "));
+		funcionario.setCpf(consoleReaderWriter.lerLinha("INFORME O CPF:..............................: "));
 
-		var dataAdmissaoInput = consoleReaderWriter.lerLinha("DATA DE ADMISSÃO (dd/MM/yyyy)..............:");
+		var dataAdmissaoInput = consoleReaderWriter.lerLinha("DATA DE ADMISSÃO (dd/MM/yyyy)...............:");
 		var dataAdmissao = LocalDate.parse(dataAdmissaoInput, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		funcionario.setDataAdmissao(dataAdmissao);
 		funcionario.setEndereco(preencherDadosEndereco());
@@ -38,11 +38,11 @@ public class FuncionarioFormReader {
 
 		endereco.setId(UUID.randomUUID());
 
-		endereco.setLogradouro(consoleReaderWriter.lerLinha("INFORME O LOGRADOURO.......................: "));
+		endereco.setLogradouro(consoleReaderWriter.lerLinha("INFORME O LOGRADOURO........................: "));
 
-		endereco.setNumero(consoleReaderWriter.lerLinha("INFORME O NÚMERO...........................: "));
+		endereco.setNumero(consoleReaderWriter.lerLinha("INFORME O NÚMERO............................: "));
 
-		endereco.setComplemento(consoleReaderWriter.lerLinha("INFORME O COMPLEMENTO......................: "));
+		endereco.setComplemento(consoleReaderWriter.lerLinha("INFORME O COMPLEMENTO.......................: "));
 
 		endereco.setBairro(consoleReaderWriter.lerLinha("INFORME O BAIRRO............................: "));
 
