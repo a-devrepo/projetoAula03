@@ -8,8 +8,8 @@ import java.util.UUID;
 import entities.Endereco;
 import entities.Funcionario;
 import exceptions.RepositoryException;
+import handlers.ErrorHandler;
 import services.FuncionarioService;
-import utils.ErrorHandler;
 
 public class FuncionarioController {
 

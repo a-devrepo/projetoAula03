@@ -2,9 +2,9 @@ package principal;
 
 import controllers.FuncionarioController;
 import factories.ConnectionFactory;
+import handlers.ErrorHandler;
 import repositories.FuncionarioRepository;
 import services.FuncionarioService;
-import utils.ErrorHandler;
 
 public class Main {
 
